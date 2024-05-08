@@ -1,20 +1,21 @@
-#skills-container{
+#skills{
   display:grid;
   font-family: var(--font);
   align-items: start;
-  padding-top: 6rem;
+  padding-top: 5rem;
 }
-#skills-container>h2{
+#skills>h2{
   text-align: center;
   color: var(--pink);
 }
-#skills{
+#skills-container{
+  padding: 3rem 0;
   display: grid;
   grid-template-columns: repeat(5,1fr);
   gap: 1rem;
   transition: .4s linear;
 }
-#skills>div{
+#skills-container>div{
   place-content: center;
   text-align: center;
   background-color: #16141587;
@@ -24,45 +25,51 @@
   padding:1rem;
   transition: .4s;
 }
-#skills>div h2{
+#skills-container>div h2{
   font-size: 1.1rem;
   padding-top: 1rem;
 }
-#skills>div i{
+#skills-container>div i{
   font-size: 6rem;
 }
-#skills>div:hover{
-  background-color:#ff00408e ; 
+#skills-container>div:hover{
+  background-color:#ee23568e ; 
 }
 @media screen and (max-width:1024px) {
-  #skills{
+  #skills-container{
     grid-template-columns: repeat(3,1fr);
   }
-  #skills>div h2{
+  #skills-container>div h2{
     font-size: 1rem;
     padding-top: 1rem;
   }
-  #skills>div i{
+  #skills-container>div i{
     font-size: 4rem;
   }
 }
 @media screen and (max-width:640px) {
-  #skills-container{
-    padding-top: 2rem;
+  #skills{
+    padding-top: 4rem;
     height: min-content;
   }
-  #skills{
+  #skills-container{
     grid-template-columns: repeat(3,1fr);
     gap: .5rem;
   }
-  #skills>div{
+  #skills-container>div{
     height: 9rem;
   }
-  #skills>div h2{
+  #skills-container>div h2{
     font-size: .8rem;
     padding-top: .3rem;
   }
-  #skills>div i{
+  #skills-container>div i{
     font-size: 3rem;
+  }
+  #skills>h2{
+    font-size: 1.2rem;
+  }
+  #skills-container{
+    padding: 3rem 0;
   }
 }

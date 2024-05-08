@@ -1,6 +1,7 @@
 @import url("./Style/Header.css");
 @import url("./Style/Home.css");
 @import url("./Style/Skills.css");
+@import url("./Style/Project.css");
 :root{
   --pink:#ff004f;
   --font: "Signika", sans-serif
@@ -28,21 +29,17 @@ body{
   border-bottom: 1px solid gray;
   display: grid;
 }
-#skills-container,#home,#about,#project{
-  height: 99.5vh;
+#skills,#home,#about,#project{
+  /* height: 99.5vh; */
+  height: max-content;
 }
 
 @media screen and (max-width:640px) {
   #home{
     height: 60vh;
   }
-  #skills-container{
+  #skills{
     height: max-content;
   }
-  #skills-container>h2{
-    font-size: 1.2rem;
-  }
-  #skills{
-    padding: 1rem 0;
-  }
+  
 }

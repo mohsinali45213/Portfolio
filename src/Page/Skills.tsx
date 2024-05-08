@@ -1,8 +1,8 @@
 const Skills = () => {
   return (
-    <div id="skills-container">
+    <div id="skills">
       <h2>SKILLS</h2>
-      <div id="skills">
+      <div id="skills-container">
         <div>
           <i className="fa-brands fa-js" style={{ color: "#FFD43B" }}></i>
           <h2>React Js</h2>

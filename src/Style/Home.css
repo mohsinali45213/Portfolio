@@ -3,7 +3,7 @@
 #home {
   display: flex;
   flex-direction: column;
-  padding-top: 8rem;
+  padding: 10rem 0 2rem 0;
   gap: 2rem;
   font-family:var(--font);
   height: calc(100vh - 4rem);

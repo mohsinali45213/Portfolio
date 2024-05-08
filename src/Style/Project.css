@@ -1,0 +1,81 @@
+#project{
+  display:grid;
+  font-family: var(--font);
+  align-items: start;
+  padding-top: 6rem;
+}
+#project>h2{
+  text-align: center;
+  color: var(--pink);
+}
+#project-container{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1rem;
+  transition: .4s linear;
+  padding: 3rem 6rem;
+}
+.cart{
+  border-radius: 10px;
+  background-color: #16141587;
+  box-shadow: 0 0 1px white;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  padding:1rem;
+  transition: .4s;
+}
+.cart .detail{
+  z-index: 1;
+  color: white;
+  padding-top: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+.cart>img{
+  border-radius: 10px;
+  width: 100%;
+  aspect-ratio: 3/2;
+}
+.cart .detail h2{
+  font-size: 1.2rem;
+}
+.cart .detail p{
+  font-size: .8rem;
+}
+.cart .detail .button {
+  display: flex;
+  gap: .5rem;
+}
+.cart .detail .button button{
+  padding: .8rem 1.5rem;
+  border-radius: 5px;
+  font-weight: 700;
+  background-color: var(--pink);
+  color: white;
+  border: none;
+  width: 100%;
+}
+
+@media screen and (max-width:1280px) {
+  #project-container{
+    padding: 3rem;
+  }
+}
+@media screen and (max-width:1024px) {
+  #project-container{
+    grid-template-columns: repeat(2,1fr);
+    padding: 3rem 1rem;
+  }
+}
+@media screen and (max-width:640px) {
+  #project{
+    padding-top: 4em;
+  }
+  #project-container{
+    grid-template-columns: repeat(1,1fr);
+    padding: 3rem 0;
+  }
+  #project>h2{
+    font-size: 1.2rem;
+  }
+}
