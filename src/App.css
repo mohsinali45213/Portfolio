@@ -1,0 +1,48 @@
+@import url("./Style/Header.css");
+@import url("./Style/Home.css");
+@import url("./Style/Skills.css");
+:root{
+  --pink:#ff004f;
+  --font: "Signika", sans-serif
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+
+html{
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: 100px;
+  margin: 1px;
+}
+
+body{
+  background-color: #262626;
+  color: white;
+}
+.container>div{
+  width: 92%;
+  margin: auto;
+  border-bottom: 1px solid gray;
+  display: grid;
+}
+#skills-container,#home,#about,#project{
+  height: 99.5vh;
+}
+
+@media screen and (max-width:640px) {
+  #home{
+    height: 60vh;
+  }
+  #skills-container{
+    height: max-content;
+  }
+  #skills-container>h2{
+    font-size: 1.2rem;
+  }
+  #skills{
+    padding: 1rem 0;
+  }
+}

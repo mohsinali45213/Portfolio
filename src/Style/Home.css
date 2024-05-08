@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap");
+
+#home {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8rem;
+  gap: 2rem;
+  font-family:var(--font);
+  height: calc(100vh - 4rem);
+}
+#home h3 {
+  font-size: 0.9rem;
+  font-weight: 100;
+}
+#home > div:nth-child(2) {
+  font-size: 3rem;
+  font-weight: 100;
+}
+#home > div:nth-child(2) span {
+  font-weight: 600;
+  color: var(--pink);
+  transition: 0.4s;
+}
+#home > div:nth-child(4) {
+  display: flex;
+  gap: 1rem;
+  justify-content: start;
+}
+#home > div:nth-child(4) button {
+  padding: 1rem 1.7rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--pink);
+  color: white;
+  font-weight: 600;
+  transition: 0.4s;
+}
+#home>i{
+  align-self: center;
+  font-size: xx-large;
+  margin-top: calc(100vh - 80vh);
+  color: var(--pink);
+}
+#home > div:nth-child(4) button:hover {
+  color: orange;
+  background-color: #bc003c;
+}
+
+@media screen and (max-width: 768px) {
+  #home > div:nth-child(2) {
+    font-size: 2.5rem;
+  }
+}
+@media screen and (max-width: 640px) {
+  #home {
+    gap: 1.3rem;
+    height: max-content;
+    padding-top: 10rem;
+    padding-bottom: 2rem;
+  }
+  #home h3 {
+    font-size: 0.6rem;
+    font-weight: 100;
+    color: var(--pink);
+  }
+  #home > div:nth-child(2) {
+    font-size: 1.5rem;
+  }
+  #home > div:nth-child(4) button {
+    padding: 0.9rem 1rem;
+    font-size: .8rem;
+  }
+  #home > div:nth-child(4) {
+    gap: .5rem;
+  }
+  #home>i{
+    display: none;
+  }
+}
