@@ -8,6 +8,7 @@
   font-family:var(--font);
   height: calc(100vh - 4rem);
 }
+
 #home h3 {
   font-size: 0.9rem;
   font-weight: 100;

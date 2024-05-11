@@ -22,7 +22,7 @@
   border-radius: 10px;
   backdrop-filter: blur(10px);
   padding:1rem;
-  transition: .4s;
+  transition: .5s;
 }
 .cart .detail{
   z-index: 1;
@@ -54,8 +54,18 @@
   color: white;
   border: none;
   width: 100%;
+  transition: .8s;
 }
-
+.cart:hover{
+  background-color:#ee23568e ; 
+}
+.cart .detail .button button:hover{
+  background-color: red;
+}
+.cart:hover .detail .button button{
+  background-color:white;
+  color: black;
+}
 @media screen and (max-width:1280px) {
   #project-container{
     padding: 3rem;

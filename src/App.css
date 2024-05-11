@@ -2,6 +2,7 @@
 @import url("./Style/Home.css");
 @import url("./Style/Skills.css");
 @import url("./Style/Project.css");
+@import url("./Style/Footer.css");
 :root{
   --pink:#ff004f;
   --font: "Signika", sans-serif
