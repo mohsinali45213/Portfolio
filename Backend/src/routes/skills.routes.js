@@ -1,4 +1,4 @@
-import { upload } from "../../middleware/multer.middleware.js";
+import { upload } from "../middleware/multer.middleware.js";
 import { createSkills,deleteSkills,getSkills,updateSkills } from "../controllers/skills.controllers.js";
 import { Router } from "express";
 const skillsRoutes = Router()

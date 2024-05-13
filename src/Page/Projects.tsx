@@ -1,78 +1,38 @@
+import projectData from "../Database/Data.js";
+
+type Data = {
+  id: number;
+  title: string;
+  description: string;
+  imgUrl: string;
+  liveUrl: string;
+  sourceUrl: string;
+};
+
 const Projects = () => {
+  console.log(projectData);
+
   return (
     <div id="project">
       <h2>Projects</h2>
       <div id="project-container">
-        <div className="cart">
-          <img src="public/Images/1.png" alt="" />
-          <div className="detail">
-            <h2>Project 1</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequuntur, voluptatibus.
-            </p>
-            <div className="button">
-              <button>Live</button>
-              <button>Source</button>
+        {projectData.map((item: Data) => (
+          <div className="cart">
+            <img src={item.imgUrl} alt="" />
+            <div className="detail">
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+              <div className="button">
+                <a href={item.liveUrl} target="_blank">
+                  <button>Live</button>
+                </a>
+                <a href={item.sourceUrl} target="_blank">
+                  <button>Source</button>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="cart">
-          <img src="public/Images/1.png" alt="" />
-          <div className="detail">
-            <h2>Project 1</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequuntur, voluptatibus.
-            </p>
-            <div className="button">
-              <button>Live</button>
-              <button>Source</button>
-            </div>
-          </div>
-        </div>
-        <div className="cart">
-          <img src="public/Images/1.png" alt="" />
-          <div className="detail">
-            <h2>Project 1</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequuntur, voluptatibus.
-            </p>
-            <div className="button">
-              <button>Live</button>
-              <button>Source</button>
-            </div>
-          </div>
-        </div>
-        <div className="cart">
-          <img src="public/Images/1.png" alt="" />
-          <div className="detail">
-            <h2>Project 1</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequuntur, voluptatibus.
-            </p>
-            <div className="button">
-              <button>Live</button>
-              <button>Source</button>
-            </div>
-          </div>
-        </div>
-        <div className="cart">
-          <img src="public/Images/1.png" alt="" />
-          <div className="detail">
-            <h2>Project 1</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequuntur, voluptatibus.
-            </p>
-            <div className="button">
-              <button>Live</button>
-              <button>Source</button>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

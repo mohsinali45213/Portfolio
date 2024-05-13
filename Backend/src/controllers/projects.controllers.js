@@ -1,10 +1,11 @@
 import Projects from "../models/Projects.models.js";
+import uploadOnCloudinary from "../utils/Cloudinary.js";
 
 const createProjects = async (req,res)=>{
   try {
     const project = new Projects(req.body);
     const result = await uploadOnCloudinary(req.file.path)
-    project.image = result.url
+    project.img = result.url
     await project.save();
     res.status(201).json(project);
   } catch (error) {

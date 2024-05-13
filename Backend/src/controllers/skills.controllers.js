@@ -5,9 +5,8 @@ const createSkills = async (req,res)=>{
   try {
     const skill = new Skills(req.body);
     const result = await uploadOnCloudinary(req.file.path)
-    console.log(result);
-    // skill.image = result.url
-    // await skill.save();
+    skill.img = result.url
+    await skill.save();
     res.status(201).json(skill);
   } catch (error) {
     console.log("skill is not create",error);

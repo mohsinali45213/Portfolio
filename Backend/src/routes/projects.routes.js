@@ -1,4 +1,4 @@
-import { upload } from "../../middleware/multer.middleware.js";
+import { upload } from "../middleware/multer.middleware.js";
 import { createProjects,deleteProjects,getProjects,updateProjects } from "../controllers/projects.controllers.js";
 import { Router } from "express";
 const projectsRoutes = Router()
