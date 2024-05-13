@@ -1,4 +1,4 @@
-import projectData from "../Database/Data.js";
+import projectData from "../Database/Data.ts";
 
 type Data = {
   id: number;
