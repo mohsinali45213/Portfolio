@@ -10,9 +10,9 @@ const projectsData  = [
   {
     id:2,
     title:"Portfolio",
-    description:"This Website create using ReactJs",
+    description:"This Website create using ReactJs with Typescript and static data source",
     imgUrl:"https://res.cloudinary.com/mohsin45213/image/upload/v1715577972/Screenshot_2024-05-12_200346_hphojr.png",
-    liveUrl:"https://mamaearth-lake.vercel.app/",
+    liveUrl:"https://portfolio0-seven.vercel.app/",
     sourceUrl:"https://github.com/mohsinali45213/Portfolio"
   }
 ]
