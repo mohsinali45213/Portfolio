@@ -1,32 +1,43 @@
-import projectData from "../Database/Data.ts";
+import { useEffect, useState } from "react";
+import service from "../Appwrite/ProjectsData.ts";
 
 type Data = {
-  id: number;
   title: string;
   description: string;
-  imgUrl: string;
+  imgUrl:URL;
   liveUrl: string;
-  sourceUrl: string;
+  githubUrl: string;
 };
 
 const Projects = () => {
-  console.log(projectData);
+  const [post, setPost] = useState<any>([]);
+
+  useEffect(() => {
+    const getPost = async () => {
+      const data = await service.getPosts([]);
+      if(data !== false){
+        setPost(data.documents);
+      }
+    };
+
+    getPost();
+  }, []);
 
   return (
     <div id="project">
       <h2>Projects</h2>
       <div id="project-container">
-        {projectData.map((item: Data) => (
-          <div className="cart">
-            <img src={item.imgUrl} alt="" />
+        {post.map((item: Data,i:number) => (
+          <div className="cart" key={i}>
+            <img src={item.imgUrl.toString()}alt="" />
             <div className="detail">
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
+              <h2>{item?.title}</h2>
+              <p>{item?.description}</p>
               <div className="button">
-                <a href={item.liveUrl} target="_blank">
+                <a href={item?.liveUrl} target="_blank">
                   <button>Live</button>
                 </a>
-                <a href={item.sourceUrl} target="_blank">
+                <a href={item?.githubUrl} target="_blank">
                   <button>Source</button>
                 </a>
               </div>

@@ -1,20 +1,20 @@
-import Header from './Components/Header'
-import Home from './Page/Home'
-import Projects from './Page/Projects'
-import Skills from './Page/Skills'
-import "./App.css"
-import About from './Page/About'
+import Header from "./Components/Header";
+import Home from "./Page/Home";
+import Projects from "./Page/Projects";
+import Skills from "./Page/Skills";
+import "./App.css";
+import About from "./Page/About";
 
-const App = () => { 
+const App = () => {
   return (
-    <div className='container'>
+    <div className="container">
       <Header/>
       <Home/>
       <About/>
       <Skills/>
       <Projects/>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
