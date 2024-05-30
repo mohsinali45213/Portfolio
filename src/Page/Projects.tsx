@@ -4,7 +4,7 @@ import service from "../Appwrite/ProjectsData.ts";
 type Data = {
   title: string;
   description: string;
-  imgUrl:URL;
+  imgUrl: URL;
   liveUrl: string;
   githubUrl: string;
 };
@@ -14,9 +14,16 @@ const Projects = () => {
 
   useEffect(() => {
     const getPost = async () => {
-      const data = await service.getPosts([]);
-      if(data !== false){
-        setPost(data.documents);
+      try {
+        const data = await service.getPosts([]);
+        console.log(data);
+
+        if (data !== false) {
+          setPost(data.documents);
+        }
+      } catch (error) {
+        console.log(error);
+        
       }
     };
 
@@ -27,9 +34,9 @@ const Projects = () => {
     <div id="project">
       <h2>Projects</h2>
       <div id="project-container">
-        {post.map((item: Data,i:number) => (
+        {post.map((item: Data, i: number) => (
           <div className="cart" key={i}>
-            <img src={item.imgUrl.toString()}alt="" />
+            <img src={item.imgUrl.toString()} alt="" />
             <div className="detail">
               <h2>{item?.title}</h2>
               <p>{item?.description}</p>
