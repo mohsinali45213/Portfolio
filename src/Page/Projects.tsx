@@ -16,7 +16,7 @@ const Projects = () => {
     const getPost = async () => {
       try {
         const data = await service.getPosts([]);
-        console.log(data);
+        // console.log(data);
 
         if (data !== false) {
           setPost(data.documents);
