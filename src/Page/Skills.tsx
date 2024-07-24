@@ -5,7 +5,7 @@ const Skills = () => {
       <div id="skills-container">
         <div>
           <i className="fa-brands fa-js" style={{ color: "#FFD43B" }}></i>
-          <h2>React Js</h2>
+          <h2>Javascript</h2>
         </div>
         <div>
           <i className="fa-brands fa-node" style={{ color: "#06b142" }}></i>
