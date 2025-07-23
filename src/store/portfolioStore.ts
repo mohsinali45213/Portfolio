@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { Experience } from '../types/types';
+import { getAllExperiences } from '../services/experienceService';
 
 interface PersonalInfo {
   $id?: string;
@@ -12,17 +14,6 @@ interface PersonalInfo {
   profile_img?: string;
   github: string;
   linkedin: string;
-}
-
-interface Experience {
-  id: number;
-  title: string;
-  company: string;
-  location: string;
-  duration: string;
-  description: string;
-  technologies: string[];
-  type: string;
 }
 
 interface Project {
@@ -68,6 +59,7 @@ interface PortfolioState {
   // Actions
   updatePersonalInfo: (info: Partial<PersonalInfo>) => void;
   updateExperiences: (experiences: Experience[]) => void;
+  loadExperiences: () => Promise<void>;
   updateProjects: (projects: Project[]) => void;
   updateSkills: (skills: Skill[]) => void;
   updateCertificates: (certificates: Certificate[]) => void;
@@ -86,48 +78,7 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
     github: 'http://github.com/mohsinali45213',
     linkedin: 'https://www.linkedin.com/in/mohsinaliaghariya/',
   },
-      experiences: [
-        {
-          id: 1,
-          title: "Senior Full Stack Developer",
-          company: "TechCorp Solutions",
-          location: "San Francisco, CA",
-          duration: "2022 - Present",
-          description: "Led development of scalable web applications using React, Node.js, and cloud technologies. Managed a team of 5 developers and improved system performance by 40%.",
-          technologies: ["React", "Node.js", "AWS", "PostgreSQL", "Docker"],
-          type: "Full-time"
-        },
-        {
-          id: 2,
-          title: "Full Stack Developer",
-          company: "Digital Innovations Inc",
-          location: "New York, NY",
-          duration: "2020 - 2022",
-          description: "Developed and maintained multiple client projects, implemented CI/CD pipelines, and collaborated with cross-functional teams to deliver high-quality solutions.",
-          technologies: ["Vue.js", "Python", "MongoDB", "Firebase", "GCP"],
-          type: "Full-time"
-        },
-        {
-          id: 3,
-          title: "Frontend Developer",
-          company: "StartupXYZ",
-          location: "Austin, TX",
-          duration: "2019 - 2020",
-          description: "Built responsive web applications and mobile-first designs. Worked closely with UX/UI designers to implement pixel-perfect interfaces.",
-          technologies: ["JavaScript", "React", "SASS", "Webpack", "Jest"],
-          type: "Full-time"
-        },
-        {
-          id: 4,
-          title: "Junior Web Developer",
-          company: "WebSolutions Agency",
-          location: "Remote",
-          duration: "2018 - 2019",
-          description: "Developed custom WordPress themes and plugins, optimized website performance, and provided technical support to clients.",
-          technologies: ["PHP", "WordPress", "MySQL", "jQuery", "CSS3"],
-          type: "Contract"
-        }
-      ],
+      experiences: [],
       projects: [
         {
           id: 1,
@@ -300,6 +251,14 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
         personalInfo: { ...state.personalInfo, ...info }
       })),
       updateExperiences: (experiences: Experience[]) => set({ experiences }),
+      loadExperiences: async () => {
+        try {
+          const experiences = await getAllExperiences();
+          set({ experiences });
+        } catch (error) {
+          console.error('Error loading experiences:', error);
+        }
+      },
       updateProjects: (projects: Project[]) => set({ projects }),
       updateSkills: (skills: Skill[]) => set({ skills }),
       updateCertificates: (certificates: Certificate[]) => set({ certificates }),

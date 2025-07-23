@@ -11,3 +11,14 @@ export interface PersonalInfo {
   github: string;
   linkedin: string;
 }
+
+export interface Experience {
+  $id?: string;
+  title: string;
+  company: string;
+  location: string;
+  duration: string;
+  type: string;
+  description: string;
+  technologies: string;
+}
