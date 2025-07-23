@@ -71,8 +71,6 @@ const Footer = () => {
             >
               <Heart size={16} className="text-red-400 fill-current" />
             </motion.span>
-            by Mohsin Ali. All rights reserved.
-          </motion.p>
             by {personalInfo.name}. All rights reserved.
           </motion.p>
 

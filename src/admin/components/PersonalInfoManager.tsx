@@ -87,9 +87,8 @@ const PersonalInfoManager = () => {
           </h3>
           <div className="text-center">
             <div className="w-32 h-32 bg-gradient-to-br from-cyan-400 to-purple-400 rounded-2xl flex items-center justify-center mb-4 mx-auto">
-                  {personalInfo.name.split(' ').map(n => n[0]).join('')}
-                MA
-              </div>
+              {personalInfo.name.split(' ').map(n => n[0]).join('')}
+              MA
             </div>
             {isEditing && (
               <motion.button
