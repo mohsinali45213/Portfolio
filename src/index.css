@@ -48,6 +48,18 @@
     box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
   }
   
+  .scrollbar-hide {
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    /* Chrome, Safari and Opera */
+    display: none;
+  }
+  
   .glow-purple {
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
   }

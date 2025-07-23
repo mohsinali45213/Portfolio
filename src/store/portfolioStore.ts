@@ -1,20 +1,17 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 
 interface PersonalInfo {
+  $id?: string;
   name: string;
   title: string;
   email: string;
   phone: string;
-  location: string;
   website: string;
+  location: string;
   bio: string;
-  avatar: string | null;
-  socialLinks: {
-    github: string;
-    linkedin: string;
-    twitter: string;
-  };
+  profile_img?: string;
+  github: string;
+  linkedin: string;
 }
 
 interface Experience {
@@ -76,24 +73,19 @@ interface PortfolioState {
   updateCertificates: (certificates: Certificate[]) => void;
 }
 
-export const usePortfolioStore = create<PortfolioState>()(
-  persist(
-    (set) => ({
-      personalInfo: {
-        name: 'Mohsin Ali',
-        title: 'Full Stack Developer & Creative Technologist',
-        email: 'mohsin.ali@example.com',
-        phone: '+1 (555) 123-4567',
-        location: 'San Francisco, CA',
-        website: 'https://mohsinali.dev',
-        bio: "I'm a passionate data scientist who loves uncovering insights from complex datasets and building intelligent systems that drive business value. When I'm not analyzing data, you'll find me exploring new ML algorithms or contributing to data science communities.",
-        avatar: null,
-        socialLinks: {
-          github: 'https://github.com',
-          linkedin: 'https://linkedin.com',
-          twitter: 'https://twitter.com',
-        }
-      },
+export const usePortfolioStore = create<PortfolioState>((set) => ({
+  personalInfo: {
+    name: 'Mohsin Ali',
+    title: 'Data scientist & ML Engineer',
+    email: 'mohsinaliabidali320@gmail.com',
+    phone: '9327900855',
+    location: 'Patan Gujarat, 384265',
+    website: '',
+    bio: '',
+    profile_img: '',
+    github: 'http://github.com/mohsinali45213',
+    linkedin: 'https://www.linkedin.com/in/mohsinaliaghariya/',
+  },
       experiences: [
         {
           id: 1,
@@ -304,16 +296,11 @@ export const usePortfolioStore = create<PortfolioState>()(
       ],
       
       // Actions
-      updatePersonalInfo: (info) => set((state) => ({
+      updatePersonalInfo: (info: Partial<PersonalInfo>) => set((state) => ({
         personalInfo: { ...state.personalInfo, ...info }
       })),
-      updateExperiences: (experiences) => set({ experiences }),
-      updateProjects: (projects) => set({ projects }),
-      updateSkills: (skills) => set({ skills }),
-      updateCertificates: (certificates) => set({ certificates }),
-    }),
-    {
-      name: 'portfolio-store',
-    }
-  )
-);
+      updateExperiences: (experiences: Experience[]) => set({ experiences }),
+      updateProjects: (projects: Project[]) => set({ projects }),
+      updateSkills: (skills: Skill[]) => set({ skills }),
+      updateCertificates: (certificates: Certificate[]) => set({ certificates }),
+    }));
