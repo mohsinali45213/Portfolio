@@ -13,44 +13,32 @@ import {
   Target,
   Activity
 } from 'lucide-react';
+import { usePortfolioStore } from '../store/portfolioStore';
 
 const Skills = () => {
+  const { skills } = usePortfolioStore();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const skillsData = [
-    // Programming Languages
-    { name: "Python", level: 95, icon: Code2, color: "from-blue-400 to-blue-600", category: "Programming" },
-    { name: "JavaScript", level: 88, icon: Code2, color: "from-yellow-400 to-yellow-600", category: "Programming" },
-    { name: "R", level: 85, icon: Code2, color: "from-blue-500 to-indigo-600", category: "Programming" },
-    { name: "SQL", level: 92, icon: Database, color: "from-green-400 to-green-600", category: "Programming" },
-    { name: "Java", level: 80, icon: Code2, color: "from-red-400 to-red-600", category: "Programming" },
-    { name: "C++", level: 75, icon: Code2, color: "from-purple-400 to-purple-600", category: "Programming" },
+  // Add icons to skills data
+  const skillsData = skills.map(skill => ({
+    ...skill,
+    icon: getIconForCategory(skill.category)
+  }));
 
-    // Data Science Libraries
-    { name: "NumPy", level: 95, icon: BarChart3, color: "from-cyan-400 to-cyan-600", category: "Data Science" },
-    { name: "Pandas", level: 95, icon: Database, color: "from-indigo-400 to-indigo-600", category: "Data Science" },
-    { name: "Matplotlib", level: 90, icon: TrendingUp, color: "from-orange-400 to-orange-600", category: "Data Science" },
-    { name: "Seaborn", level: 88, icon: Activity, color: "from-teal-400 to-teal-600", category: "Data Science" },
-    { name: "Scikit-learn", level: 92, icon: Brain, color: "from-pink-400 to-pink-600", category: "Data Science" },
-    { name: "TensorFlow", level: 88, icon: Brain, color: "from-amber-400 to-amber-600", category: "Data Science" },
-
-    // Machine Learning
-    { name: "Machine Learning", level: 90, icon: Brain, color: "from-purple-500 to-pink-500", category: "ML/AI" },
-    { name: "Deep Learning", level: 85, icon: Zap, color: "from-violet-400 to-violet-600", category: "ML/AI" },
-    { name: "NLP", level: 82, icon: Target, color: "from-emerald-400 to-emerald-600", category: "ML/AI" },
-    { name: "Computer Vision", level: 80, icon: Target, color: "from-rose-400 to-rose-600", category: "ML/AI" },
-
-    // Big Data & Cloud
-    { name: "Apache Spark", level: 85, icon: Zap, color: "from-orange-500 to-red-500", category: "Big Data" },
-    { name: "Hadoop", level: 78, icon: Database, color: "from-yellow-500 to-orange-500", category: "Big Data" },
-    { name: "AWS", level: 88, icon: Cloud, color: "from-blue-500 to-cyan-500", category: "Cloud" },
-    { name: "GCP", level: 82, icon: Cloud, color: "from-green-500 to-blue-500", category: "Cloud" },
-    { name: "Docker", level: 85, icon: GitBranch, color: "from-blue-400 to-blue-500", category: "DevOps" },
-    { name: "Kubernetes", level: 80, icon: GitBranch, color: "from-indigo-400 to-purple-500", category: "DevOps" },
-  ];
+  function getIconForCategory(category: string) {
+    switch (category) {
+      case 'Programming': return Code2;
+      case 'Data Science': return BarChart3;
+      case 'ML/AI': return Brain;
+      case 'Big Data': return Database;
+      case 'Cloud': return Cloud;
+      case 'DevOps': return GitBranch;
+      default: return Code2;
+    }
+  }
 
   const categories = ["Programming", "Data Science", "ML/AI", "Big Data", "Cloud", "DevOps"];
 

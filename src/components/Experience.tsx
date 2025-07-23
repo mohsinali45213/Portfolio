@@ -2,55 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Briefcase, Calendar, MapPin, Award } from 'lucide-react';
+import { usePortfolioStore } from '../store/portfolioStore';
 
 const Experience = () => {
+  const { experiences } = usePortfolioStore();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-
-  const experiences = [
-    {
-      id: 1,
-      title: "Senior Full Stack Developer",
-      company: "TechCorp Solutions",
-      location: "San Francisco, CA",
-      duration: "2022 - Present",
-      description: "Led development of scalable web applications using React, Node.js, and cloud technologies. Managed a team of 5 developers and improved system performance by 40%.",
-      technologies: ["React", "Node.js", "AWS", "PostgreSQL", "Docker"],
-      type: "Full-time"
-    },
-    {
-      id: 2,
-      title: "Full Stack Developer",
-      company: "Digital Innovations Inc",
-      location: "New York, NY",
-      duration: "2020 - 2022",
-      description: "Developed and maintained multiple client projects, implemented CI/CD pipelines, and collaborated with cross-functional teams to deliver high-quality solutions.",
-      technologies: ["Vue.js", "Python", "MongoDB", "Firebase", "GCP"],
-      type: "Full-time"
-    },
-    {
-      id: 3,
-      title: "Frontend Developer",
-      company: "StartupXYZ",
-      location: "Austin, TX",
-      duration: "2019 - 2020",
-      description: "Built responsive web applications and mobile-first designs. Worked closely with UX/UI designers to implement pixel-perfect interfaces.",
-      technologies: ["JavaScript", "React", "SASS", "Webpack", "Jest"],
-      type: "Full-time"
-    },
-    {
-      id: 4,
-      title: "Junior Web Developer",
-      company: "WebSolutions Agency",
-      location: "Remote",
-      duration: "2018 - 2019",
-      description: "Developed custom WordPress themes and plugins, optimized website performance, and provided technical support to clients.",
-      technologies: ["PHP", "WordPress", "MySQL", "jQuery", "CSS3"],
-      type: "Contract"
-    }
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },

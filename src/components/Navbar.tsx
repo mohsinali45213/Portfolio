@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { usePortfolioStore } from '../store/portfolioStore';
 
 const Navbar = () => {
+  const { personalInfo } = usePortfolioStore();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -48,7 +50,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
           >
-            Mohsin Ali
+            {personalInfo.name}
           </motion.div>
 
           {/* Desktop Menu */}

@@ -3,69 +3,14 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ExternalLink, Github, Eye } from 'lucide-react';
 import Tilt from 'react-parallax-tilt';
+import { usePortfolioStore } from '../store/portfolioStore';
 
 const Projects = () => {
+  const { projects } = usePortfolioStore();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-
-  const projects = [
-    {
-      id: 1,
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with React, Node.js, and PostgreSQL. Features include user authentication, payment processing, and admin dashboard.",
-      image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React", "Node.js", "PostgreSQL", "Stripe"],
-      liveUrl: "#",
-      githubUrl: "#"
-    },
-    {
-      id: 2,
-      title: "Task Management App",
-      description: "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-      image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React", "Socket.io", "MongoDB", "Express"],
-      liveUrl: "#",
-      githubUrl: "#"
-    },
-    {
-      id: 3,
-      title: "AI Dashboard",
-      description: "Modern analytics dashboard with AI-powered insights, data visualization, and interactive charts for business intelligence.",
-      image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["Next.js", "TypeScript", "Python", "TensorFlow"],
-      liveUrl: "#",
-      githubUrl: "#"
-    },
-    {
-      id: 4,
-      title: "Social Media Platform",
-      description: "Full-featured social media platform with real-time messaging, post sharing, and advanced privacy controls.",
-      image: "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React Native", "Firebase", "Node.js", "GraphQL"],
-      liveUrl: "#",
-      githubUrl: "#"
-    },
-    {
-      id: 5,
-      title: "Cryptocurrency Tracker",
-      description: "Real-time cryptocurrency tracking application with portfolio management, price alerts, and market analysis tools.",
-      image: "https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["Vue.js", "D3.js", "Node.js", "WebSocket"],
-      liveUrl: "#",
-      githubUrl: "#"
-    },
-    {
-      id: 6,
-      title: "Learning Management System",
-      description: "Comprehensive LMS platform with course creation, student progress tracking, and interactive learning modules.",
-      image: "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React", "Django", "PostgreSQL", "Redis"],
-      liveUrl: "#",
-      githubUrl: "#"
-    }
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },

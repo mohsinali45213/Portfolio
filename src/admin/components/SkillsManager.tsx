@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, Code2, Database, BarChart3, Brain, Cloud, GitBranch } from 'lucide-react';
+import { usePortfolioStore } from '../../store/portfolioStore';
 
 const SkillsManager = () => {
-  const [skills, setSkills] = useState([
-    { id: 1, name: "Python", level: 95, category: "Programming", color: "from-blue-400 to-blue-600" },
-    { id: 2, name: "JavaScript", level: 88, category: "Programming", color: "from-yellow-400 to-yellow-600" },
-    { id: 3, name: "React", level: 92, category: "Frontend", color: "from-cyan-400 to-cyan-600" },
-    { id: 4, name: "Node.js", level: 85, category: "Backend", color: "from-green-400 to-green-600" },
-    { id: 5, name: "AWS", level: 88, category: "Cloud", color: "from-orange-400 to-orange-600" },
-    { id: 6, name: "PostgreSQL", level: 90, category: "Database", color: "from-purple-400 to-purple-600" },
-  ]);
+  const { skills, updateSkills } = usePortfolioStore();
 
   const [editingId, setEditingId] = useState<number | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -66,16 +60,17 @@ const SkillsManager = () => {
 
   const handleSave = () => {
     if (editingId) {
-      setSkills(prev => prev.map(skill => 
+      const updatedSkills = skills.map(skill => 
         skill.id === editingId ? { ...skill, ...formData } : skill
-      ));
+      );
+      updateSkills(updatedSkills);
       setEditingId(null);
     } else {
       const newSkill = {
         ...formData,
         id: Date.now()
       };
-      setSkills(prev => [...prev, newSkill]);
+      updateSkills([...skills, newSkill]);
       setShowAddForm(false);
     }
 
@@ -89,7 +84,7 @@ const SkillsManager = () => {
 
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this skill?')) {
-      setSkills(prev => prev.filter(skill => skill.id !== id));
+      updateSkills(skills.filter(skill => skill.id !== id));
     }
   };
 
@@ -131,7 +126,14 @@ const SkillsManager = () => {
           <select
             value={formData.category}
             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-            className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400"
+            className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 appearance-none cursor-pointer"
+            style={{ 
+              backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
+              backgroundPosition: 'right 0.5rem center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: '1.5em 1.5em',
+              paddingRight: '2.5rem'
+            }}
           >
             {categories.map(category => (
               <option key={category} value={category}>{category}</option>

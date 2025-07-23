@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, ArrowUp } from 'lucide-react';
+import { usePortfolioStore } from '../store/portfolioStore';
 
 const Footer = () => {
+  const { personalInfo } = usePortfolioStore();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -16,10 +18,10 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              Mohsin Ali
+              {personalInfo.name}
             </h3>
             <p className="text-white/70 text-sm leading-relaxed">
-              Full Stack Developer passionate about creating innovative digital experiences 
+              {personalInfo.title} passionate about creating innovative digital experiences 
               that make a difference in the world.
             </p>
           </div>
@@ -48,9 +50,9 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-white font-semibold">Get In Touch</h4>
             <div className="space-y-2 text-sm text-white/70">
-              <p>mohsin.ali@example.com</p>
-              <p>+1 (555) 123-4567</p>
-              <p>San Francisco, CA</p>
+              <p>{personalInfo.email}</p>
+              <p>{personalInfo.phone}</p>
+              <p>{personalInfo.location}</p>
             </div>
           </div>
         </div>
@@ -70,6 +72,8 @@ const Footer = () => {
               <Heart size={16} className="text-red-400 fill-current" />
             </motion.span>
             by Mohsin Ali. All rights reserved.
+          </motion.p>
+            by {personalInfo.name}. All rights reserved.
           </motion.p>
 
           <motion.button

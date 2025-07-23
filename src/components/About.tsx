@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { BarChart3, Database, Brain, Zap, Heart, Coffee, Lightbulb, Target } from 'lucide-react';
+import { usePortfolioStore } from '../store/portfolioStore';
 
 const About = () => {
+  const { personalInfo } = usePortfolioStore();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -131,15 +133,13 @@ const About = () => {
               <div className="flex flex-col items-center text-center">
                 <div className="w-32 h-32 bg-gradient-to-br from-cyan-400 to-purple-400 rounded-2xl flex items-center justify-center mb-6 shadow-2xl">
                   <div className="w-28 h-28 bg-gray-800 rounded-xl flex items-center justify-center text-3xl font-bold text-white">
-                    MA
+                    {personalInfo.name.split(' ').map(n => n[0]).join('')}
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Mohsin Ali</h3>
-                <p className="text-cyan-400 font-medium mb-4">Data Scientist & ML Engineer</p>
+                <h3 className="text-2xl font-bold text-white mb-2">{personalInfo.name}</h3>
+                <p className="text-cyan-400 font-medium mb-4">{personalInfo.title}</p>
                 <p className="text-white/70 leading-relaxed">
-                  Based in San Francisco, I specialize in extracting meaningful insights from data and 
-                  building machine learning models that solve real-world problems. I believe in data-driven 
-                  decisions that create measurable impact.
+                  {personalInfo.bio}
                 </p>
               </div>
             </div>

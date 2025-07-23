@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle } from 'lucide-react';
+import { usePortfolioStore } from '../store/portfolioStore';
 
 const Contact = () => {
+  const { personalInfo } = usePortfolioStore();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -64,19 +66,19 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "mohsin.ali@example.com",
-      href: "mailto:mohsin.ali@example.com"
+      value: personalInfo.email,
+      href: `mailto:${personalInfo.email}`
     },
     {
       icon: Phone,
       label: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567"
+      value: personalInfo.phone,
+      href: `tel:${personalInfo.phone.replace(/\D/g, '')}`
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "San Francisco, CA",
+      value: personalInfo.location,
       href: "#"
     },
   ];

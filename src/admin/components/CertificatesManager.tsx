@@ -1,34 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, Upload, Award, Calendar, ExternalLink, CheckCircle } from 'lucide-react';
+import { usePortfolioStore } from '../../store/portfolioStore';
 
 const CertificatesManager = () => {
-  const [certificates, setCertificates] = useState([
-    {
-      id: 1,
-      title: "AWS Certified Solutions Architect",
-      issuer: "Amazon Web Services",
-      date: "2023",
-      credentialId: "AWS-SAA-2023-001",
-      image: "https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400",
-      description: "Comprehensive certification covering AWS cloud architecture, security, and best practices.",
-      skills: ["Cloud Architecture", "AWS Services", "Security", "Scalability"],
-      verified: true,
-      link: "#"
-    },
-    {
-      id: 2,
-      title: "Google Cloud Professional Developer",
-      issuer: "Google Cloud",
-      date: "2023",
-      credentialId: "GCP-PD-2023-002",
-      image: "https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=400",
-      description: "Advanced certification in Google Cloud Platform development and deployment strategies.",
-      skills: ["GCP Services", "Kubernetes", "DevOps", "Microservices"],
-      verified: true,
-      link: "#"
-    }
-  ]);
+  const { certificates, updateCertificates } = usePortfolioStore();
 
   const [editingId, setEditingId] = useState<number | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -59,16 +35,17 @@ const CertificatesManager = () => {
     };
 
     if (editingId) {
-      setCertificates(prev => prev.map(cert => 
+      const updatedCertificates = certificates.map(cert => 
         cert.id === editingId ? { ...cert, ...updatedCertificate } : cert
-      ));
+      );
+      updateCertificates(updatedCertificates);
       setEditingId(null);
     } else {
       const newCertificate = {
         ...updatedCertificate,
         id: Date.now()
       };
-      setCertificates(prev => [newCertificate, ...prev]);
+      updateCertificates([newCertificate, ...certificates]);
       setShowAddForm(false);
     }
 
@@ -87,7 +64,7 @@ const CertificatesManager = () => {
 
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this certificate?')) {
-      setCertificates(prev => prev.filter(cert => cert.id !== id));
+      updateCertificates(certificates.filter(cert => cert.id !== id));
     }
   };
 

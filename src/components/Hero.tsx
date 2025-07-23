@@ -4,6 +4,7 @@ import { OrbitControls, Text, MeshDistortMaterial, Float, Sphere, Torus, Box } f
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import * as THREE from 'three';
+import { usePortfolioStore } from '../store/portfolioStore';
 
 const RotatingCube = () => {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -94,6 +95,8 @@ const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) =
 };
 
 const Hero = () => {
+  const { personalInfo } = usePortfolioStore();
+  
   const scrollToNext = () => {
     const element = document.querySelector('#about');
     if (element) {
@@ -148,7 +151,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
           >
-            <TypewriterText text="Hi, I'm Mohsin Ali" delay={1.5} />
+            <TypewriterText text={`Hi, I'm ${personalInfo.name}`} delay={1.5} />
           </motion.h1>
           
           <motion.p
@@ -157,7 +160,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.5, duration: 0.8 }}
           >
-            <TypewriterText text="Full Stack Developer | Creative Technologist" delay={3} />
+            <TypewriterText text={personalInfo.title} delay={3} />
           </motion.p>
 
           <motion.div

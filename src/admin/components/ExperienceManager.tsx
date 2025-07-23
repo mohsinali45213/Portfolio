@@ -1,30 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, X, Briefcase, Calendar, MapPin } from 'lucide-react';
+import { usePortfolioStore } from '../../store/portfolioStore';
 
 const ExperienceManager = () => {
-  const [experiences, setExperiences] = useState([
-    {
-      id: 1,
-      title: "Senior Full Stack Developer",
-      company: "TechCorp Solutions",
-      location: "San Francisco, CA",
-      duration: "2022 - Present",
-      description: "Led development of scalable web applications using React, Node.js, and cloud technologies. Managed a team of 5 developers and improved system performance by 40%.",
-      technologies: ["React", "Node.js", "AWS", "PostgreSQL", "Docker"],
-      type: "Full-time"
-    },
-    {
-      id: 2,
-      title: "Full Stack Developer",
-      company: "Digital Innovations Inc",
-      location: "New York, NY",
-      duration: "2020 - 2022",
-      description: "Developed and maintained multiple client projects, implemented CI/CD pipelines, and collaborated with cross-functional teams to deliver high-quality solutions.",
-      technologies: ["Vue.js", "Python", "MongoDB", "Firebase", "GCP"],
-      type: "Full-time"
-    }
-  ]);
+  const { experiences, updateExperiences } = usePortfolioStore();
 
   const [editingId, setEditingId] = useState<number | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -53,16 +33,17 @@ const ExperienceManager = () => {
     };
 
     if (editingId) {
-      setExperiences(prev => prev.map(exp => 
+      const updatedExperiences = experiences.map(exp => 
         exp.id === editingId ? { ...exp, ...updatedExperience } : exp
-      ));
+      );
+      updateExperiences(updatedExperiences);
       setEditingId(null);
     } else {
       const newExperience = {
         ...updatedExperience,
         id: Date.now()
       };
-      setExperiences(prev => [newExperience, ...prev]);
+      updateExperiences([newExperience, ...experiences]);
       setShowAddForm(false);
     }
 
@@ -79,7 +60,7 @@ const ExperienceManager = () => {
 
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this experience?')) {
-      setExperiences(prev => prev.filter(exp => exp.id !== id));
+      updateExperiences(experiences.filter(exp => exp.id !== id));
     }
   };
 

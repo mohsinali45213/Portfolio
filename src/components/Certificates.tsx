@@ -2,87 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Award, ExternalLink, Calendar, CheckCircle } from 'lucide-react';
+import { usePortfolioStore } from '../store/portfolioStore';
 
 const Certificates = () => {
+  const { certificates } = usePortfolioStore();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-
-  const certificates = [
-    {
-      id: 1,
-      title: "AWS Certified Solutions Architect",
-      issuer: "Amazon Web Services",
-      date: "2023",
-      credentialId: "AWS-SAA-2023-001",
-      image: "https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400",
-      description: "Comprehensive certification covering AWS cloud architecture, security, and best practices.",
-      skills: ["Cloud Architecture", "AWS Services", "Security", "Scalability"],
-      verified: true,
-      link: "#"
-    },
-    {
-      id: 2,
-      title: "Google Cloud Professional Developer",
-      issuer: "Google Cloud",
-      date: "2023",
-      credentialId: "GCP-PD-2023-002",
-      image: "https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=400",
-      description: "Advanced certification in Google Cloud Platform development and deployment strategies.",
-      skills: ["GCP Services", "Kubernetes", "DevOps", "Microservices"],
-      verified: true,
-      link: "#"
-    },
-    {
-      id: 3,
-      title: "Meta React Developer Certificate",
-      issuer: "Meta (Facebook)",
-      date: "2022",
-      credentialId: "META-RD-2022-003",
-      image: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=400",
-      description: "Professional certificate program covering advanced React development and modern JavaScript.",
-      skills: ["React", "JavaScript", "Redux", "Testing"],
-      verified: true,
-      link: "#"
-    },
-    {
-      id: 4,
-      title: "MongoDB Certified Developer",
-      issuer: "MongoDB University",
-      date: "2022",
-      credentialId: "MDB-DEV-2022-004",
-      image: "https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=400",
-      description: "Certification in MongoDB database design, development, and optimization techniques.",
-      skills: ["MongoDB", "Database Design", "Aggregation", "Performance"],
-      verified: true,
-      link: "#"
-    },
-    {
-      id: 5,
-      title: "Docker Certified Associate",
-      issuer: "Docker Inc.",
-      date: "2021",
-      credentialId: "DCA-2021-005",
-      image: "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=400",
-      description: "Professional certification in containerization, orchestration, and Docker best practices.",
-      skills: ["Docker", "Containerization", "DevOps", "CI/CD"],
-      verified: true,
-      link: "#"
-    },
-    {
-      id: 6,
-      title: "Certified Kubernetes Administrator",
-      issuer: "Cloud Native Computing Foundation",
-      date: "2021",
-      credentialId: "CKA-2021-006",
-      image: "https://images.pexels.com/photos/1181280/pexels-photo-1181280.jpeg?auto=compress&cs=tinysrgb&w=400",
-      description: "Hands-on certification demonstrating skills in Kubernetes cluster administration.",
-      skills: ["Kubernetes", "Container Orchestration", "Cluster Management", "Networking"],
-      verified: true,
-      link: "#"
-    }
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },

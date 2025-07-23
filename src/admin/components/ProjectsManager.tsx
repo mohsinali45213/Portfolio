@@ -1,32 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Save, Upload, ExternalLink, Github, Eye } from 'lucide-react';
+import { usePortfolioStore } from '../../store/portfolioStore';
 
 const ProjectsManager = () => {
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with React, Node.js, and PostgreSQL. Features include user authentication, payment processing, and admin dashboard.",
-      image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React", "Node.js", "PostgreSQL", "Stripe"],
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: true,
-      status: "completed"
-    },
-    {
-      id: 2,
-      title: "Task Management App",
-      description: "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-      image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React", "Socket.io", "MongoDB", "Express"],
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: true,
-      status: "completed"
-    }
-  ]);
+  const { projects, updateProjects } = usePortfolioStore();
 
   const [editingId, setEditingId] = useState<number | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -56,16 +34,17 @@ const ProjectsManager = () => {
     };
 
     if (editingId) {
-      setProjects(prev => prev.map(proj => 
+      const updatedProjects = projects.map(proj => 
         proj.id === editingId ? { ...proj, ...updatedProject } : proj
-      ));
+      );
+      updateProjects(updatedProjects);
       setEditingId(null);
     } else {
       const newProject = {
         ...updatedProject,
         id: Date.now()
       };
-      setProjects(prev => [newProject, ...prev]);
+      updateProjects([newProject, ...projects]);
       setShowAddForm(false);
     }
 
@@ -83,7 +62,7 @@ const ProjectsManager = () => {
 
   const handleDelete = (id: number) => {
     if (confirm('Are you sure you want to delete this project?')) {
-      setProjects(prev => prev.filter(proj => proj.id !== id));
+      updateProjects(projects.filter(proj => proj.id !== id));
     }
   };
 
@@ -129,7 +108,14 @@ const ProjectsManager = () => {
           <select
             value={formData.status}
             onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-            className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400"
+            className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 appearance-none cursor-pointer"
+            style={{ 
+              backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
+              backgroundPosition: 'right 0.5rem center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: '1.5em 1.5em',
+              paddingRight: '2.5rem'
+            }}
           >
             <option value="completed">Completed</option>
             <option value="in-progress">In Progress</option>
