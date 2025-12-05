@@ -103,7 +103,7 @@ const Contact = () => {
             className="space-y-8"
           >
             {/* Contact Information */}
-            <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10 shadow-2xl">
+            <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-6 md:p-8 border border-white/10 shadow-2xl">
               <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
               <div className="space-y-4">
                 {contactInfo.map((item, index) => {
@@ -115,12 +115,12 @@ const Contact = () => {
                       whileHover={{ x: 10 }}
                       className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group"
                     >
-                      <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500">
+                      <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 flex-shrink-0">
                         <Icon size={20} className="text-white" />
                       </div>
-                      <div>
+                      <div className="min-w-0 flex-1">
                         <p className="text-white/60 text-sm">{item.label}</p>
-                        <p className="text-white font-medium group-hover:text-cyan-400 transition-colors duration-300">
+                        <p className="text-white font-medium group-hover:text-cyan-400 transition-colors duration-300 break-words break-all sm:break-normal">
                           {item.value}
                         </p>
                       </div>
@@ -131,9 +131,9 @@ const Contact = () => {
             </div>
 
             {/* Social Links */}
-            <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10 shadow-2xl">
+            <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-6 md:p-8 border border-white/10 shadow-2xl">
               <h3 className="text-2xl font-bold text-white mb-6">Follow Me</h3>
-              <div className="flex justify-center gap-6">
+              <div className="flex flex-wrap justify-center gap-4 md:gap-6">
                 {socialLinks.map((social, index) => {
                   const Icon = social.icon;
                   return (
@@ -155,7 +155,7 @@ const Contact = () => {
                   );
                 })}
               </div>
-              <p className="text-white/60 text-center mt-6 text-sm">
+              <p className="text-white/60 text-center mt-6 text-sm px-4">
                 Let's connect and build something incredible together!
               </p>
             </div>
