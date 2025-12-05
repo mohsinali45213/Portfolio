@@ -11,6 +11,19 @@ const Certificates = () => {
     threshold: 0.1,
   });
 
+  // Helper to get image URL
+  const getImageUrl = (imageUrl: string) => {
+    if (!imageUrl) return 'https://via.placeholder.com/400x300?text=Certificate';
+    // If it's already a full URL, return it
+    if (imageUrl.includes('http')) return imageUrl;
+    // If it's a file ID (for backward compatibility), construct URL
+    const BUCKET_ID = import.meta.env.VITE_APPWRITE_BUCKET_ID;
+    if (BUCKET_ID) {
+      return `${import.meta.env.VITE_APPWRITE_ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${imageUrl}/view?project=${import.meta.env.VITE_APPWRITE_PROJECT_ID}`;
+    }
+    return 'https://via.placeholder.com/400x300?text=Certificate';
+  };
+
   // Helper to parse skills string to array
   const parseSkills = (skills: string): string[] => {
     if (Array.isArray(skills)) return skills;
@@ -112,7 +125,7 @@ const Certificates = () => {
             >
               <div className="relative overflow-hidden">
                 <img
-                  src={cert.image}
+                  src={getImageUrl(cert.image)}
                   alt={cert.title}
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />

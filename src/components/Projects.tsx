@@ -12,6 +12,19 @@ const Projects = () => {
     threshold: 0.1,
   });
 
+  // Helper to get image URL
+  const getImageUrl = (imageUrl: string) => {
+    if (!imageUrl) return 'https://via.placeholder.com/400x300?text=Project+Image';
+    // If it's already a full URL, return it
+    if (imageUrl.includes('http')) return imageUrl;
+    // If it's a file ID (for backward compatibility), construct URL
+    const BUCKET_ID = import.meta.env.VITE_APPWRITE_BUCKET_ID;
+    if (BUCKET_ID) {
+      return `${import.meta.env.VITE_APPWRITE_ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${imageUrl}/view?project=${import.meta.env.VITE_APPWRITE_PROJECT_ID}`;
+    }
+    return 'https://via.placeholder.com/400x300?text=Project+Image';
+  };
+
   // Helper to parse tech string to array
   const parseTech = (tech: string): string[] => {
     if (Array.isArray(tech)) return tech;
@@ -85,7 +98,7 @@ const Projects = () => {
                 <div className="bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 shadow-2xl group hover:shadow-cyan-500/20 transition-all duration-500">
                   <div className="relative overflow-hidden">
                     <img
-                      src={project.image}
+                      src={getImageUrl(project.image)}
                       alt={project.title}
                       className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                     />
