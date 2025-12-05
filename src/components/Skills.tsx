@@ -1,22 +1,22 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
   Code2, 
   Database, 
-  BarChart3, 
   Brain, 
   Cloud, 
   GitBranch,
   TrendingUp,
   Zap,
   Target,
-  Activity
+  Activity,
+  LineChart,
+  Cpu
 } from 'lucide-react';
 import { usePortfolioStore } from '../store/portfolioStore';
 
 const Skills = () => {
-  const { skills } = usePortfolioStore();
+  const { skills, loading } = usePortfolioStore();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -31,16 +31,22 @@ const Skills = () => {
   function getIconForCategory(category: string) {
     switch (category) {
       case 'Programming': return Code2;
-      case 'Data Science': return BarChart3;
-      case 'ML/AI': return Brain;
-      case 'Big Data': return Database;
+      case 'Frontend': return TrendingUp;
+      case 'Backend': return Zap;
+      case 'Database': return Database;
+      case 'Data Science': return LineChart;
+      case 'ML/AI': return Cpu;
+      case 'Agentic AI': return Brain;
       case 'Cloud': return Cloud;
       case 'DevOps': return GitBranch;
+      case 'Mobile': return Target;
+      case 'Design': return Activity;
       default: return Code2;
     }
   }
 
-  const categories = ["Programming", "Data Science", "ML/AI", "Big Data", "Cloud", "DevOps"];
+  // Get unique categories dynamically from skills
+  const categories = [...new Set(skills.map(skill => skill.category))].sort();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -65,6 +71,19 @@ const Skills = () => {
   const getSkillsByCategory = (category: string) => {
     return skillsData.filter(skill => skill.category === category);
   };
+
+  if (loading) {
+    return (
+      <section id="skills" className="py-20 px-4 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-white/70">Loading skills...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="skills" className="py-20 px-4 relative overflow-hidden">
@@ -108,19 +127,31 @@ const Skills = () => {
         </motion.div>
 
         {/* Skills by Category */}
-        <div className="space-y-12">
-          {categories.map((category, categoryIndex) => {
-            const categorySkills = getSkillsByCategory(category);
-            if (categorySkills.length === 0) return null;
+        {skillsData.length === 0 ? (
+          <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-12 border border-white/10 text-center">
+            <Code2 size={64} className="mx-auto text-white/40 mb-6" />
+            <h3 className="text-2xl font-bold text-white mb-4">No Skills Yet</h3>
+            <p className="text-white/60 text-lg mb-6">
+              Skills information will appear here once it's added through the admin panel.
+            </p>
+            <div className="text-white/40 text-sm">
+              Add your technical skills via the admin dashboard to showcase your expertise.
+            </div>
+          </div>
+        ) : (
+          <div className="space-y-12">
+            {categories.map((category, categoryIndex) => {
+              const categorySkills = getSkillsByCategory(category);
+              if (categorySkills.length === 0) return null;
 
-            return (
-              <motion.div
-                key={category}
-                initial={{ opacity: 0, y: 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
-                className="mb-12"
-              >
+              return (
+                <motion.div
+                  key={category}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
+                  className="mb-12"
+                >
                 <h3 className="text-2xl font-bold text-white mb-8 text-center">
                   <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                     {category}
@@ -133,11 +164,11 @@ const Skills = () => {
                   animate={inView ? "visible" : "hidden"}
                   className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4"
                 >
-                  {categorySkills.map((skill, index) => {
+                  {categorySkills.map((skill) => {
                     const Icon = skill.icon;
                     return (
                       <motion.div
-                        key={skill.name}
+                        key={skill.$id || skill.name}
                         variants={itemVariants}
                         whileHover={{ 
                           y: -10, 
@@ -156,22 +187,8 @@ const Skills = () => {
                           </h4>
                           
                           <div className="relative">
-                            <div className="w-full bg-white/10 rounded-full h-2 mb-2">
-                              <motion.div
-                                initial={{ width: 0 }}
-                                animate={inView ? { width: `${skill.level}%` } : {}}
-                                transition={{ duration: 1.5, delay: 0.5 + index * 0.1 }}
-                                className={`h-2 bg-gradient-to-r ${skill.color} rounded-full relative overflow-hidden`}
-                              >
-                                <motion.div
-                                  animate={{ x: [-100, 100] }}
-                                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                                  className="absolute inset-0 bg-white/30 w-8 skew-x-12"
-                                />
-                              </motion.div>
-                            </div>
                             <span className="text-cyan-400 text-xs font-bold">
-                              {skill.level}%
+                              {skill.proficiency}
                             </span>
                           </div>
                         </div>
@@ -182,36 +199,8 @@ const Skills = () => {
               </motion.div>
             );
           })}
-        </div>
-
-        {/* Skills Summary Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
-        >
-          {[
-            { label: "Programming Languages", value: "6", color: "text-blue-400" },
-            { label: "Data Science Tools", value: "12+", color: "text-cyan-400" },
-            { label: "ML Frameworks", value: "8+", color: "text-purple-400" },
-            { label: "Cloud Platforms", value: "5+", color: "text-green-400" },
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="text-center bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300"
-            >
-              <div className={`text-3xl font-bold ${stat.color} mb-2`}>
-                {stat.value}
-              </div>
-              <div className="text-white/70 text-sm">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
+          </div>
+        )}
       </div>
     </section>
   );

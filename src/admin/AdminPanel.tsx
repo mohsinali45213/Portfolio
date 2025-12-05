@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, Settings, User, Briefcase, FolderOpen, Award, Mail, TrendingUp, Zap, LogOut } from 'lucide-react';
+import { Eye, EyeOff, Settings, User, Briefcase, FolderOpen, Award, TrendingUp, Zap, LogOut } from 'lucide-react';
 import PersonalInfoManager from '../admin/components/PersonalInfoManager';
 import ExperienceManager from '../admin/components/ExperienceManager';
 import ProjectsManager from '../admin/components/ProjectsManager';
 import SkillsManager from '../admin/components/SkillsManager';
 import CertificatesManager from '../admin/components/CertificatesManager';
-import ContactManager from '../admin/components/ContactManager';
 import SEOOptimizer from '../admin/components/SEOOptimizer';
 import { login, logout, getCurrentUser } from '../services/authService';
 
@@ -22,7 +21,6 @@ const AdminPanel = () => {
     { id: 'projects', label: 'Projects', icon: FolderOpen },
     { id: 'skills', label: 'Skills', icon: Zap },
     { id: 'certificates', label: 'Certificates', icon: Award },
-    { id: 'contact', label: 'Contact', icon: Mail },
     { id: 'seo', label: 'SEO', icon: TrendingUp },
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
@@ -170,7 +168,6 @@ const AdminPanel = () => {
           {activeTab === 'projects' && <ProjectsManager />}
           {activeTab === 'skills' && <SkillsManager />}
           {activeTab === 'certificates' && <CertificatesManager />}
-          {activeTab === 'contact' && <ContactManager />}
           {activeTab === 'seo' && <SEOOptimizer />}
           {activeTab === 'settings' && <SettingsPanel />}
         </main>

@@ -40,10 +40,10 @@ const AnalyticsDashboard = () => {
       <div className="flex items-center justify-between">
         <h2 className="text-3xl font-bold text-white">Analytics Dashboard</h2>
         <div className="flex gap-3">
-          <select className="bg-white/10 text-white border border-white/20 rounded-lg px-4 py-2">
-            <option>Last 7 days</option>
-            <option>Last 30 days</option>
-            <option>Last 90 days</option>
+          <select className="bg-slate-800 text-white border border-white/20 rounded-lg px-4 py-2">
+            <option className="bg-slate-800 text-white">Last 7 days</option>
+            <option className="bg-slate-800 text-white">Last 30 days</option>
+            <option className="bg-slate-800 text-white">Last 90 days</option>
           </select>
           <motion.button
             whileHover={{ scale: 1.05 }}

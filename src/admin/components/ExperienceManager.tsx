@@ -260,13 +260,13 @@ const ExperienceManager = () => {
               value={formData.type}
               onChange={handleInputChange}
               required
-              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:bg-white/15"
+              className="w-full bg-slate-800 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400"
             >
-              <option value="Full-time" className="bg-gray-800 text-white">Full-time</option>
-              <option value="Part-time" className="bg-gray-800 text-white">Part-time</option>
-              <option value="Contract" className="bg-gray-800 text-white">Contract</option>
-              <option value="Freelance" className="bg-gray-800 text-white">Freelance</option>
-              <option value="Internship" className="bg-gray-800 text-white">Internship</option>
+              <option value="Full-time" className="bg-slate-800 text-white">Full-time</option>
+              <option value="Part-time" className="bg-slate-800 text-white">Part-time</option>
+              <option value="Contract" className="bg-slate-800 text-white">Contract</option>
+              <option value="Freelance" className="bg-slate-800 text-white">Freelance</option>
+              <option value="Internship" className="bg-slate-800 text-white">Internship</option>
             </select>
           </div>
 
@@ -326,8 +326,15 @@ const ExperienceManager = () => {
       ) : (
         <div className="space-y-4">
           {experiences.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-white/60 text-lg">No experiences found. Add your first experience!</p>
+            <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-12 border border-white/10 text-center">
+              <Briefcase size={64} className="mx-auto text-white/40 mb-6" />
+              <h3 className="text-2xl font-bold text-white mb-4">No Experience Added</h3>
+              <p className="text-white/60 text-lg mb-6">
+                Start building your professional timeline by clicking the "Add Experience" button above.
+              </p>
+              <p className="text-white/40 text-sm">
+                Add your work experience to showcase your career journey.
+              </p>
             </div>
           ) : (
             experiences.map((experience) => (

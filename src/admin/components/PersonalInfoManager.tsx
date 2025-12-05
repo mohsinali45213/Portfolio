@@ -93,6 +93,8 @@ const PersonalInfoManager = () => {
     const file = event.target.files?.[0];
     if (!file) return;
 
+    console.log('File selected:', file.name, file.type, file.size);
+
     // Validate file type
     if (!file.type.startsWith('image/')) {
       showToast('Please select a valid image file', 'error');
@@ -105,19 +107,30 @@ const PersonalInfoManager = () => {
       return;
     }
 
+    // Check if BUCKET_ID is defined
+    if (!BUCKET_ID) {
+      console.error('BUCKET_ID is not defined in environment variables');
+      showToast('Storage configuration error. Please check environment variables.', 'error');
+      return;
+    }
+
+    console.log('Starting upload to bucket:', BUCKET_ID);
     setIsUploadingImage(true);
     try {
       // Delete old image if exists
       if (localInfo.profile_img) {
         try {
+          console.log('Deleting old image:', localInfo.profile_img);
           await storage.deleteFile(BUCKET_ID, localInfo.profile_img);
         } catch (error) {
-          console.log('Old image not found, continuing with upload');
+          console.log('Old image not found or could not be deleted, continuing with upload');
         }
       }
 
       // Upload new image
+      console.log('Uploading new image...');
       const uploadedFile = await storage.createFile(BUCKET_ID, ID.unique(), file);
+      console.log('Upload successful, file ID:', uploadedFile.$id);
       
       // Update local state with new image ID
       setLocalInfo(prev => ({
@@ -126,11 +139,15 @@ const PersonalInfoManager = () => {
       }));
 
       showToast('Image uploaded successfully!', 'success');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error uploading image:', error);
-      showToast('Error uploading image. Please try again.', 'error');
+      showToast(`Error uploading image: ${error.message || 'Please try again.'}`, 'error');
     } finally {
       setIsUploadingImage(false);
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
 

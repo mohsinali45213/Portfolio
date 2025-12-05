@@ -11,6 +11,16 @@ const Certificates = () => {
     threshold: 0.1,
   });
 
+  // Helper to parse skills string to array
+  const parseSkills = (skills: string): string[] => {
+    if (Array.isArray(skills)) return skills;
+    try {
+      return JSON.parse(skills);
+    } catch {
+      return skills.split(',').map(s => s.trim());
+    }
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -79,9 +89,23 @@ const Certificates = () => {
           animate={inView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {certificates.map((cert) => (
+          {certificates.length === 0 ? (
+            <div className="col-span-full">
+              <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-12 border border-white/10 text-center">
+                <Award size={64} className="mx-auto text-white/40 mb-6" />
+                <h3 className="text-2xl font-bold text-white mb-4">No Certifications Yet</h3>
+                <p className="text-white/60 text-lg mb-6">
+                  Certification information will appear here once it's added through the admin panel.
+                </p>
+                <div className="text-white/40 text-sm">
+                  Add your certifications and achievements via the admin dashboard to showcase your credentials.
+                </div>
+              </div>
+            </div>
+          ) : (
+            certificates.map((cert, index) => (
             <motion.div
-              key={cert.id}
+              key={cert.$id || index}
               variants={itemVariants}
               whileHover={{ y: -10, scale: 1.02 }}
               className="bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 shadow-2xl hover:shadow-yellow-500/20 transition-all duration-500 group"
@@ -127,7 +151,7 @@ const Certificates = () => {
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {cert.skills.map((skill, index) => (
+                  {parseSkills(cert.skills).map((skill, index) => (
                     <span
                       key={index}
                       className="bg-white/10 text-white/80 px-2 py-1 rounded-full text-xs font-medium border border-white/20"
@@ -153,35 +177,8 @@ const Certificates = () => {
                 </div>
               </div>
             </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Stats section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
-        >
-          {[
-            { label: "Certifications", value: "6+", color: "text-yellow-400" },
-            { label: "Years Experience", value: "5+", color: "text-cyan-400" },
-            { label: "Technologies", value: "20+", color: "text-purple-400" },
-            { label: "Projects", value: "50+", color: "text-green-400" },
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-              className="text-center bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10"
-            >
-              <div className={`text-3xl font-bold ${stat.color} mb-2`}>
-                {stat.value}
-              </div>
-              <div className="text-white/70 text-sm">{stat.label}</div>
-            </motion.div>
-          ))}
+            ))
+          )}
         </motion.div>
       </div>
     </section>

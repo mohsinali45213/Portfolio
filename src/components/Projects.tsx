@@ -12,6 +12,16 @@ const Projects = () => {
     threshold: 0.1,
   });
 
+  // Helper to parse tech string to array
+  const parseTech = (tech: string): string[] => {
+    if (Array.isArray(tech)) return tech;
+    try {
+      return JSON.parse(tech);
+    } catch {
+      return tech.split(',').map(t => t.trim());
+    }
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -55,8 +65,22 @@ const Projects = () => {
           animate={inView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {projects.map((project) => (
-            <motion.div key={project.id} variants={itemVariants}>
+          {projects.length === 0 ? (
+            <div className="col-span-full">
+              <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-12 border border-white/10 text-center">
+                <Github size={64} className="mx-auto text-white/40 mb-6" />
+                <h3 className="text-2xl font-bold text-white mb-4">No Projects Yet</h3>
+                <p className="text-white/60 text-lg mb-6">
+                  Project information will appear here once it's added through the admin panel.
+                </p>
+                <div className="text-white/40 text-sm">
+                  Add your projects via the admin dashboard to showcase your portfolio work.
+                </div>
+              </div>
+            </div>
+          ) : (
+            projects.map((project, index) => (
+            <motion.div key={project.$id || index} variants={itemVariants}>
               <Tilt options={{ max: 15, scale: 1.05, speed: 300 }}>
                 <div className="bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 shadow-2xl group hover:shadow-cyan-500/20 transition-all duration-500">
                   <div className="relative overflow-hidden">
@@ -94,7 +118,7 @@ const Projects = () => {
                     </p>
 
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tech.map((tech, index) => (
+                      {parseTech(project.tech).map((tech, index) => (
                         <span
                           key={index}
                           className="bg-white/10 text-white/80 px-3 py-1 rounded-full text-xs font-medium border border-white/20"
@@ -128,7 +152,8 @@ const Projects = () => {
                 </div>
               </Tilt>
             </motion.div>
-          ))}
+            ))
+          )}
         </motion.div>
       </div>
     </section>

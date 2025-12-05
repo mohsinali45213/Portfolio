@@ -1,20 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { BarChart3, Database, Brain, Zap, Heart, Coffee, Lightbulb, Target } from 'lucide-react';
+import { BarChart3, Database, Brain, Zap, Heart, Coffee, Lightbulb, Target, FolderGit2, Award } from 'lucide-react';
 import { usePortfolioStore } from '../store/portfolioStore';
 
 const About = () => {
-  const { personalInfo } = usePortfolioStore();
+  const { personalInfo, projects, skills, certificates } = usePortfolioStore();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
   const personalStats = [
-    { label: "Years of Experience", value: "4+", icon: BarChart3, color: "text-cyan-400" },
-    { label: "ML Models Deployed", value: "50+", icon: Target, color: "text-purple-400" },
-    { label: "Data Tools Mastered", value: "20+", icon: Database, color: "text-green-400" },
+    { label: "Projects", value: projects.length.toString(), icon: FolderGit2, color: "text-cyan-400" },
+    { label: "Skills", value: skills.length.toString(), icon: Target, color: "text-purple-400" },
+    { label: "Certificates", value: certificates.length.toString(), icon: Award, color: "text-green-400" },
     { label: "Cups of Coffee", value: "∞", icon: Coffee, color: "text-yellow-400" },
   ];
 
@@ -30,49 +30,16 @@ const About = () => {
       description: "Discovering hidden patterns in data and transforming raw information into actionable business insights."
     },
     {
-      icon: Heart,
-      title: "Impact-Driven Analytics",
-      description: "Creating data-driven solutions that make meaningful impact on business decisions and user experiences."
+      icon: Zap,
+      title: "Agentic AI",
+      description: "Creating autonomous AI agents that can perceive, reason, and act independently to accomplish complex tasks and goals."
     },
     {
-      icon: BarChart3,
-      title: "Data Visualization",
-      description: "Transforming complex datasets into compelling visual stories that communicate insights effectively."
+      icon: Database,
+      title: "Full Stack Web Dev",
+      description: "Building end-to-end web applications with modern frameworks, databases, and cloud infrastructure for scalable solutions."
     }
   ];
-
-  // const journey = [
-  //   {
-  //     year: "2020",
-  //     title: "Data Science Foundation",
-  //     description: "Started my journey with Python, statistics, and machine learning. Built my first predictive model and discovered the power of data."
-  //   },
-  //   {
-  //     year: "2021",
-  //     title: "Machine Learning Mastery",
-  //     description: "Mastered scikit-learn, TensorFlow, and deep learning. Started building complex neural networks and NLP models."
-  //   },
-  //   {
-  //     year: "2022",
-  //     title: "Big Data & Cloud",
-  //     description: "Expanded to big data technologies with Spark, Hadoop, and cloud platforms like AWS and GCP for scalable analytics."
-  //   },
-  //   {
-  //     year: "2023",
-  //     title: "Professional Growth",
-  //     description: "Joined my first data science team and started working on production ML systems and real-time analytics."
-  //   },
-  //   {
-  //     year: "2024",
-  //     title: "Leadership Role",
-  //     description: "Became a senior data scientist, mentoring junior analysts and leading data strategy decisions."
-  //   },
-  //   {
-  //     year: "2025",
-  //     title: "AI Innovation Focus",
-  //     description: "Currently exploring generative AI, MLOps, and advanced deep learning architectures for next-generation solutions."
-  //   }
-  // ];
 
   return (
     <section id="about" className="py-20 px-4 relative overflow-hidden">
@@ -113,9 +80,7 @@ const About = () => {
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto rounded-full mb-8"></div>
           <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            I'm a passionate data scientist who loves uncovering insights from complex datasets and 
-            building intelligent systems that drive business value. When I'm not analyzing data, you'll 
-            find me exploring new ML algorithms or contributing to data science communities.
+            {personalInfo.bio}
           </p>
         </motion.div>
 
@@ -137,10 +102,7 @@ const About = () => {
                   </div>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">{personalInfo.name}</h3>
-                <p className="text-cyan-400 font-medium mb-4">{personalInfo.title}</p>
-                <p className="text-white/70 leading-relaxed">
-                  {personalInfo.bio}
-                </p>
+                <p className="text-cyan-400 font-medium">{personalInfo.title}</p>
               </div>
             </div>
 
