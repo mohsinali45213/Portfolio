@@ -21,6 +21,7 @@
     "react-parallax-tilt": "^1.7.220",
     "react-router-dom": "^7.7.0",
     "three": "^0.166.1",
+    "three-mesh-bvh": "^0.8.0",
     "zustand": "^5.0.6"
   },
   "devDependencies": {
