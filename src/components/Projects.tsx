@@ -93,9 +93,9 @@ const Projects = () => {
             </div>
           ) : (
             projects.map((project, index) => (
-            <motion.div key={project.$id || index} variants={itemVariants}>
-              <Tilt options={{ max: 15, scale: 1.05, speed: 300 }}>
-                <div className="bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 shadow-2xl group hover:shadow-cyan-500/20 transition-all duration-500">
+            <motion.div key={project.$id || index} variants={itemVariants} className="h-full">
+              <Tilt options={{ max: 15, scale: 1.05, speed: 300 }} className="h-full">
+                <div className="bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 shadow-2xl group hover:shadow-cyan-500/20 transition-all duration-500 h-full flex flex-col">
                   <div className="relative overflow-hidden">
                     <img
                       src={getImageUrl(project.image)}
@@ -122,7 +122,7 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  <div className="p-6">
+                  <div className="p-6 flex-grow flex flex-col">
                     <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors duration-300">
                       {project.title}
                     </h3>
@@ -141,7 +141,7 @@ const Projects = () => {
                       ))}
                     </div>
 
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 mt-auto">
                       <motion.a
                         href={project.liveUrl}
                         whileHover={{ scale: 1.05 }}

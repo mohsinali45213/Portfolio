@@ -121,7 +121,7 @@ const Certificates = () => {
               key={cert.$id || index}
               variants={itemVariants}
               whileHover={{ y: -10, scale: 1.02 }}
-              className="bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 shadow-2xl hover:shadow-yellow-500/20 transition-all duration-500 group"
+              className="bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 shadow-2xl hover:shadow-yellow-500/20 transition-all duration-500 group h-full flex flex-col"
             >
               <div className="relative overflow-hidden">
                 <img
@@ -147,7 +147,7 @@ const Certificates = () => {
                 </div>
               </div>
 
-              <div className="p-6">
+              <div className="p-6 flex-grow flex flex-col">
                 <div className="flex items-center gap-2 mb-3">
                   <Calendar size={16} className="text-white/60" />
                   <span className="text-white/60 text-sm">{cert.date}</span>
@@ -174,7 +174,7 @@ const Certificates = () => {
                   ))}
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mt-auto">
                   <div className="text-xs text-white/50 font-mono">
                     ID: {cert.credentialId}
                   </div>
