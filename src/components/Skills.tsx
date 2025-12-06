@@ -7,11 +7,8 @@ import {
   Cloud, 
   GitBranch,
   TrendingUp,
-  Zap,
   Target,
-  Activity,
-  LineChart,
-  Cpu
+  Bot,
 } from 'lucide-react';
 import { usePortfolioStore } from '../store/portfolioStore';
 
@@ -30,17 +27,14 @@ const Skills = () => {
 
   function getIconForCategory(category: string) {
     switch (category) {
-      case 'Programming': return Code2;
-      case 'Frontend': return TrendingUp;
-      case 'Backend': return Zap;
-      case 'Database': return Database;
-      case 'Data Science': return LineChart;
-      case 'ML/AI': return Cpu;
-      case 'Agentic AI': return Brain;
-      case 'Cloud': return Cloud;
-      case 'DevOps': return GitBranch;
-      case 'Mobile': return Target;
-      case 'Design': return Activity;
+          case 'Programming': return Code2;
+          case 'Database': return Database;
+          case 'Data Science & AI/ML': return Bot;
+          case 'Cloud': return Cloud;
+          case 'DevOps': return GitBranch;
+          case 'Web Development': return TrendingUp;
+          case 'Mobile': return Target;
+          case "Agentic AI": return Brain;
       default: return Code2;
     }
   }
