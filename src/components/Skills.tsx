@@ -29,12 +29,12 @@ const Skills = () => {
     switch (category) {
           case 'Programming': return Code2;
           case 'Database': return Database;
-          case 'Data Science & AI/ML': return Bot;
+          case 'Data Science & AI/ML': return Brain;
           case 'Cloud': return Cloud;
           case 'DevOps': return GitBranch;
           case 'Web Development': return TrendingUp;
           case 'Mobile': return Target;
-          case "Agentic AI": return Brain;
+          case "Agentic AI": return  Bot;
       default: return Code2;
     }
   }

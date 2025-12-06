@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Plus, Edit, Trash2, Save, Code2, Database, BarChart3, Brain, Cloud, GitBranch, Loader2, TrendingUp, Zap, Target, Activity } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, Code2, Database, Brain, Cloud, GitBranch, Loader2, TrendingUp,Target, Bot } from 'lucide-react';
 import { usePortfolioStore } from '../../store/portfolioStore';
 import { createSkill, updateSkill, deleteSkill } from '../../services/skillsService';
 import { Skill } from '../../types/types';
@@ -80,14 +80,14 @@ const SkillsManager = () => {
 
   const getIconForCategory = (category: string) => {
     switch (category) {
-      case 'Programming': return Code2;
-      case 'Database': return Database;
-      case 'Data Science & AI/ML': return Zap;
-      case 'Cloud': return Cloud;
-      case 'DevOps': return GitBranch;
-      case 'Web Development': return TrendingUp;
-      case 'Mobile': return Target;
-      case "Agentic AI": return Brain;
+     case 'Programming': return Code2;
+          case 'Database': return Database;
+          case 'Data Science & AI/ML': return Brain;
+          case 'Cloud': return Cloud;
+          case 'DevOps': return GitBranch;
+          case 'Web Development': return TrendingUp;
+          case 'Mobile': return Target;
+          case "Agentic AI": return  Bot;
 
       default: return Code2;
     }
